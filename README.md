@@ -33,9 +33,9 @@
 
 ---
 
-### 系统架构
-
-![系统架构图](https://example.com/system-architecture-diagram.png)
+### BSP
+**详见**BJDJ.pdf
+![image](https://github.com/pieceofApple/Intelligent-logistics-car/assets/116827010/cad4108e-c378-4e20-a0d5-161835b46c54)
 
 ---
 
