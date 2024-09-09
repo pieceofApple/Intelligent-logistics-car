@@ -1,0 +1,62 @@
+#ifndef __CONTROL_H
+#define __CONTRO_H	 
+#include "sys.h"
+
+#define ID1 1
+#define ID2 2
+#define ID3 3
+#define ID4 4
+#define ID5 5
+#define ID6 6
+
+extern int servo_data[10];	   
+extern u8 target_data[]; 
+extern u8 NO_flag;
+
+extern float line_Ra;
+extern float line_La;
+extern float line_Ld;
+
+extern int circle_FB; 
+extern int circle_LR;
+
+void Task_1(void)	;//第一轮
+void Task_2(void)	;//第二轮
+
+void circle_move(void);	//校准靶区
+
+void Get_yuanpan(u8 num);	//抓取 原料区 圆盘上物料 num为抓取颜色	
+
+void Put_one(u8 num);//放置粗加工区
+void Get_two(u8 num);//抓取粗加工区
+void Put_two_A(u8 num);//放置半成品区 底层码垛
+void Put_two_B(u8 num);//放置半成品区 顶层码垛
+
+void Put_one_1(void); //放加工区1号位
+void Put_one_2(void); //放加工区2号位
+void Put_one_3(void); //放加工区3号位
+
+void Get_two_1(void);//抓加工区1号位
+void Get_two_2(void);//抓加工区2号位
+void Get_two_3(void);//抓加工区3号位
+
+void Put_two_1(void);	//放成品区顶层1号位
+void Put_two_2(void);	//放成品区顶层2号位
+void Put_two_3(void);	//放成品区顶层3号位
+		
+void Put_wan(u8 num);
+void Get_wan(u8 num);
+
+void UART4_Process(void);	//二维码识别
+
+//*******以下串口调试所用，与程序运行无关***************//
+void UASRT_Process(void);
+int U1_data(u8 *num,int x);
+	
+				    
+#endif
+
+
+
+
+

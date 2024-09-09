@@ -1,0 +1,121 @@
+#include "sys.h"
+#include "usart.h"		
+#include "delay.h"	
+int main(void)
+{
+	int i;
+	
+	u8 buf[9]={0x7e,0x00,0x08,0x01,0x00,0x02,0x01,0xab,0xcd};
+	Stm32_Clock_Init(9);	//系统时钟设置
+	uart_init(72,9600);           //=====串口1初始化
+	delay_init(72);	   	 	//延时初始化 
+	
+	usart2_init(36,9600);	//初始化串口2为:9600,波特率.
+	uart4_init(36,9600);	//初始化串口4为:9600,波特率.
+	uart5_init(36,9600);	//初始化串口5为:9600,波特率.	串口屏
+	LED_Init();											//LED初始化
+	TIM6_Int_Init(719,19);					//100Khz的计数频率，计数5次为50us  24-19	
+	BJ_Motor_Init();	
+	TIM3_PWM_Init(9999,143);				//=====初始化PWM 50HZ，用于驱动舵机
+	TIM4_PWM_Init(9999,143);				//=====初始化PWM 50HZ，用于驱动舵机
+	IO_init();
+
+	P2=1;P3=1;
+	delay_ms(500); 
+	
+	while(NO_flag);NO_flag=1;
+	uart4_sendString(buf,9); 
+	Target_claw=0;
+	Servo_data(97,TargetY,TargetZ);delay_ms(500);
+	
+	//Task_1()	;//第一轮
+	//Task_2()	;//第二轮
+	Servo_data(97,TargetY,TargetZ);delay_ms(500);
+	Servo_data(TargetX,152,191);delay_ms(700);
+	Set_PWM(PWM1,810-30,596+150-50,1198-150+50,PWM5);delay_ms(500);delay_ms(500);delay_ms(500);delay_ms(500);;delay_ms(500);delay_ms(500);
+	
+	Calibration_green_FB(circle_FB);
+	Calibration_green_LR(circle_LR);
+	Servo_data(97,35,121);delay_ms(500);
+
+	//---------圆盘抓取----------
+	// LEFT(180-15);	delay_ms(500);
+	// FRONT(640-50);	delay_ms(500);
+	
+	// UART4_Process();	//二维码识别
+	
+	// FRONT(820+35);	delay_ms(500);
+	/*
+	for(i=0;i<3;i++)
+	{
+		Get_yuanpan(target_data[i]); //圆盘上物料target_data[i]为抓取颜色	
+		Put_wan(target_data[i]);	//放target_data[i]号碗
+	}
+*/
+
+/*
+	//------粗加工区-----
+	circle_move();//校准靶区
+	
+	for(i=0;i<3;i++)
+	{
+		Get_wan(target_data[i]);	//取target_data[i]号碗
+		Put_one(target_data[i]);//放置粗加工区
+	}
+	
+	for(i=0;i<3;i++)
+	{
+		Get_two(target_data[i]);//抓取粗加工区
+		Put_wan(target_data[i]);	//放target_data[i]号碗
+	}
+*/
+
+
+	//码垛，色块校准
+	
+	
+//	circle_move();//校准靶区
+	
+//	for(i=4;i<7;i++)
+//	{
+//		Get_wan(target_data[i]);	//取target_data[i]号碗
+//		Put_one(target_data[i]);//放置粗加工区
+//	}
+//	
+//	for(i=4;i<7;i++)
+//	{
+//		Get_two(target_data[i]);//抓取粗加工区
+//		Put_wan(target_data[i]);	//放target_data[i]号碗
+//	}
+	
+/*	
+	FRONT(790-130);	delay_ms(500);
+	Move_rotate(-90);delay_ms(900);	
+	FRONT(840);	delay_ms(500);
+	
+	
+	Servo_data(97,TargetY,TargetZ);delay_ms(500);
+	Servo_data(TargetX,152,191);delay_ms(700);
+	Set_PWM(PWM1,810-30,596+150-50,1198-150+50,PWM5);delay_ms(500);delay_ms(500);delay_ms(500);delay_ms(500);;delay_ms(500);delay_ms(500);
+	
+	Calibration_green_FB(circle_FB);
+	Calibration_green_LR(circle_LR);
+
+	for(i=4;i<7;i++)
+	{
+		Get_wan(target_data[i]);	//取target_data[i]号碗
+		Put_two_B(target_data[i]);//放置半成品区 顶层码垛
+	}	
+	*/
+//	FRONT(1000-20);	delay_ms(500);
+//	
+//	Move_rotate(-90);delay_ms(900);	
+//	RIGHT(100-15);	delay_ms(500);
+//	FRONT(1760);	delay_ms(500);
+	
+
+	while(1)
+	{
+
+	}
+}

@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "OPENMV.C": "cpp",
+        "control.h": "c"
+    }
+}
