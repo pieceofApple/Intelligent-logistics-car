@@ -1,0 +1,25 @@
+--cpu Cortex-M3
+"..\obj\objects\startup_stm32f10x_hd.o"
+"..\obj\objects\transferrobot.o"
+"..\obj\objects\delay.o"
+"..\obj\objects\sys.o"
+"..\obj\objects\usart.o"
+"..\obj\objects\bj_motor.o"
+"..\obj\objects\timer.o"
+"..\obj\objects\control.o"
+"..\obj\objects\servo.o"
+"..\obj\objects\usart2.o"
+"..\obj\objects\openmv.o"
+"..\obj\objects\hmi.o"
+"..\obj\objects\croutine.o"
+"..\obj\objects\event_groups.o"
+"..\obj\objects\list.o"
+"..\obj\objects\queue.o"
+"..\obj\objects\tasks.o"
+"..\obj\objects\timers.o"
+"..\obj\objects\heap_4.o"
+"..\obj\objects\port.o"
+--strict --scatter "..\OBJ\Objects\TransferRobot.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "..\OBJ\Listings\TransferRobot.map" -o ..\OBJ\Objects\TransferRobot.axf
